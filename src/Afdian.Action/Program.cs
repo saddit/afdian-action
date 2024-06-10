@@ -155,9 +155,9 @@ namespace Afdian.Action
                 {
                     string beforeStr = targetFileContent.Substring(0, startFlagIndex);
                     string afterSstr = targetFileContent.Substring(endFlagIndex + endFlag.Length);
-                    string centerStr = startFlag + "\n" + runResult + "\n" + endFlag;
-                    string curTime = $"<!-- {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} -->";
-                    targetFileContent = beforeStr + curTime + centerStr + afterSstr;
+                    string curTime = $"\n<!-- update time: {DateTime.Now:yyyy-MM-dd HH:mm:ss} -->\n";
+                    string centerStr = startFlag + curTime + runResult + "\n" + endFlag;
+                    targetFileContent = beforeStr + centerStr + afterSstr;
 
                     File.WriteAllText(targetFilePath, targetFileContent, System.Text.Encoding.UTF8);
 
