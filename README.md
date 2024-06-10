@@ -4,15 +4,11 @@
 
 [![repo size](https://img.shields.io/github/repo-size/yiyungent/afdian-action.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/github/license/yiyungent/afdian-action.svg?style=flat)](https://github.com/yiyungent/afdian-action/blob/main/LICENSE)
-[![QQ Group](https://img.shields.io/badge/QQ%20Group-894031109-deepgreen)](https://jq.qq.com/?_wv=1027&k=q5R82fYN)
-[![爱发电](https://afdian.moeci.com/1/badge.svg)](https://afdian.net/@yiyun)
 
 
 ## 介绍
 
 使用 `GitHub Action` 自动更新 爱发电 赞助列表, 无需再手动更新赞助列表。
-
-> 效果见 [Sponsors.md](https://github.com/yiyungent/afdian-action/blob/main/Sponsors.md)
 
 ## 功能
 

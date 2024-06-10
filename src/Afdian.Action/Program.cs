@@ -49,8 +49,7 @@ namespace Afdian.Action
             {
                 string message = "user_id, token 效验不通过";
                 Utils.LogUtil.Error(message);
-
-                return;
+                throw new Exception("运行失败");
             }
             var orderModel = afdianClient.QueryOrderModel();
             var sponsorModel = afdianClient.QuerySponsorModel();
@@ -64,8 +63,8 @@ namespace Afdian.Action
 
             // 3. ViewModel 传递给 afdian-action-template.cshtml (templateFilePath), RazorEngine 解析
             IRazorEngine razorEngine = new RazorEngine();
-            string templateText = null;
-            string runResult = null;
+            string templateText = "";
+            string runResult = "";
             try
             {
                 templateText = Utils.FileUtil.ReadStringAsync(templateFilePath).Result;
@@ -74,12 +73,12 @@ namespace Afdian.Action
             {
                 Utils.LogUtil.Error("模板文件 读取 失败");
                 Utils.LogUtil.Exception(ex);
-                return;
+                throw new Exception("运行失败");
             }
             if (string.IsNullOrEmpty(templateText))
             {
                 Utils.LogUtil.Error("模板文件 不能为空");
-                return;
+                throw new Exception("运行失败");
             }
             try
             {
@@ -132,12 +131,12 @@ namespace Afdian.Action
             {
                 Utils.LogUtil.Error("模板文件 编译/运行 失败");
                 Utils.LogUtil.Exception(ex);
-                return;
+                throw new Exception("运行失败");
             }
             if (string.IsNullOrEmpty(runResult))
             {
                 Utils.LogUtil.Error("运行结果为 空");
-                return;
+                throw new Exception("运行失败");
             }
 
             // 4. 找到 目标文件 -> 根据开始结束符号 -> 找到修改插入位置 -> 修改文件内容
@@ -147,7 +146,7 @@ namespace Afdian.Action
                 if (!existTargetFile)
                 {
                     Utils.LogUtil.Error("不存在目标文件");
-                    return;
+                    throw new Exception("运行失败");
                 }
                 string targetFileContent = Utils.FileUtil.ReadStringAsync(targetFilePath).Result;
                 int startFlagIndex = targetFileContent.IndexOf(startFlag);
@@ -157,7 +156,8 @@ namespace Afdian.Action
                     string beforeStr = targetFileContent.Substring(0, startFlagIndex);
                     string afterSstr = targetFileContent.Substring(endFlagIndex + endFlag.Length);
                     string centerStr = startFlag + "\n" + runResult + "\n" + endFlag;
-                    targetFileContent = beforeStr + centerStr + afterSstr;
+                    string curTime = $"<!-- {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} -->";
+                    targetFileContent = beforeStr + curTime + centerStr + afterSstr;
 
                     File.WriteAllText(targetFilePath, targetFileContent, System.Text.Encoding.UTF8);
 
@@ -168,6 +168,7 @@ namespace Afdian.Action
             {
                 Utils.LogUtil.Error("更新 目标文件 失败");
                 Utils.LogUtil.Exception(ex);
+                throw new Exception("运行失败");
             }
 
         }
