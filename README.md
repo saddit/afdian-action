@@ -35,7 +35,7 @@
         var sponsorItem  = viewModel.Sponsor.data.list[i];
      }
 
-<a href="https://afdian.net/u/@sponsorItem.user.user_id">
+<a href="https://afdian.com/u/@sponsorItem.user.user_id">
     <img src="@sponsorItem.user.avatar?imageView2/1/w/120/h/120" width="40" height="40" alt="@sponsorItem.user.name" title="@sponsorItem.user.name"/>
 </a>
 }
@@ -765,7 +765,7 @@ namespace Afdian.Sdk.ResponseModels
 afdian-action is an MIT licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
 
 We accept donations through these channels:
-- <a href="https://afdian.net/@yiyun" target="_blank">爱发电</a>
+- <a href="https://afdian.com/@yiyun" target="_blank">爱发电</a>
 
 ## Author
 
